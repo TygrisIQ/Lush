@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Lush</string>
+    <string name="permission_not_granted">Permission not Granted!</string>
+    <string name="reading_external_storage">READING STORAGE</string>
+    <string name="GIVE_PERMISSION">Give Permission</string>
+</resources>
