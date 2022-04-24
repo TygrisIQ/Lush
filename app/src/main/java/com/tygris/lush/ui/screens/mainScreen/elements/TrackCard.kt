@@ -1,16 +1,24 @@
 package com.tygris.lush.ui.screens.mainScreen.elements
 
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
+import android.util.Log
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -18,7 +26,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import coil.compose.rememberAsyncImagePainter
 import com.tygris.lush.ui.theme.LushTheme
+import com.tygris.lush.R
 import com.tygris.lush.ui.theme.rubik
 
 
@@ -28,20 +38,14 @@ fun TrackCard(title: String?,
               album : String?,
               length : Float,
               isSelected: Boolean,
-              albumArt : Bitmap){
-
-        Card(backgroundColor = Color.Transparent,
+              ){
+         Card(backgroundColor = Color.Transparent,
             border = BorderStroke(2.dp,Color.Transparent),
             modifier = Modifier
                 .wrapContentHeight()
                 .fillMaxWidth(),
 
         ) {
-            //Album Art Row
-            Row(modifier = Modifier.fillMaxWidth(0.20f)) {
-                AsyncImage(albumArt, contentDescription =null,
-                )
-            }
             Row() {
                 Column(modifier =Modifier.padding(start = 3.dp,
                     top = 2.dp, bottom = 2.dp)){
@@ -66,23 +70,9 @@ fun TrackCard(title: String?,
 
                 }
             }
+            }
+
         }
 
-}
 
-//@Preview(showBackground = true)
-//@Composable
-//fun TrackCardPreview(){
-//    TrackCard(false)
-//}
-//@Preview(showBackground = true)
-//@Composable
-//fun TrackCardPreviewDark(){
-//    LushTheme(darkTheme = false) {
-//        TrackCard(false)
-//    }
-//}
-////////////////////////////////////
-//Cleaning out my closet/////////://
-//Eminem - The Eminem Show///////://
-///////////////////////////////////
+
