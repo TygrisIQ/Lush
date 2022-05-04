@@ -4,4 +4,5 @@
     <string name="reading_external_storage">READING STORAGE</string>
     <string name="GIVE_PERMISSION">Give Permission</string>
     <string name="ALBUM_ART">Album Art</string>
+    <string name="Search">Search</string>
 </resources>

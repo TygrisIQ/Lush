@@ -8,10 +8,19 @@ data class Track(
     val uuid : UUID = UUID.randomUUID(),
     val track_id : Long,
     val track_title : String,
-    val track_length : Float,
+    val track_length : String,
     val track_album : String?,
     val track_artist : String?,
-    val info_format : String,
     val track_uri : Uri,
     val track_image : ImageBitmap?
     )
+
+data class TrackMinimal(
+    val track_title : String,
+    val track_length : String,
+    val track_album : String?,
+    val track_artist : String?,
+    val track_uri : Uri,
+    val track_image : ImageBitmap?
+)
+

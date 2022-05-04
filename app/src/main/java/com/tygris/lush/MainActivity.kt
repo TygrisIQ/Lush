@@ -26,20 +26,24 @@ import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberPermissionState
 import com.tygris.lush.ui.navigation.AppNavigation
 import com.tygris.lush.ui.screens.util_screens.PermissionNotGranted
+import com.tygris.lush.ui.state.PlayViewModel
 import com.tygris.lush.ui.state.TrackListViewModel
 import com.tygris.lush.ui.theme.LushTheme
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 
-
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val trackListViewModel : TrackListViewModel by viewModels()
+    private val playingviewmodel : PlayViewModel by viewModels()
+
+
     @OptIn(ExperimentalPermissionsApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
             LushTheme {
-                //A surface container using the 'background' color from the theme
                 val storagePermissionState = rememberPermissionState(
                     android.Manifest.permission.READ_EXTERNAL_STORAGE)
                 when(storagePermissionState.status){
@@ -50,7 +54,7 @@ class MainActivity : ComponentActivity() {
                       ) {
 
                           trackListViewModel.getMusicList(this)
-                          AppNavigation(trackListViewModel)
+                          AppNavigation(trackListViewModel, playingviewmodel)
                       }
                   }else -> {
                       Surface(

@@ -1,6 +1,5 @@
 package com.tygris.lush.ui.screens.util_screens
 
-import androidx.compose.animation.expandHorizontally
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -9,14 +8,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.tygris.lush.ui.screens.shared.LushTopbar
+import com.tygris.lush.ui.screens.shared.LushTopBar
 import com.tygris.lush.R
 import com.tygris.lush.ui.theme.rubik
 
 @Composable
 fun PermissionNotGranted(text: String?, giveRequest: ()->Unit){
     val context = LocalContext.current
-    Scaffold(topBar = { LushTopbar(context = context)}) {
+    Scaffold(topBar = { LushTopBar(context = context)  }) {
         Column(modifier = Modifier.fillMaxSize(), verticalArrangement =
         Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally){
             text?.let { it1 ->

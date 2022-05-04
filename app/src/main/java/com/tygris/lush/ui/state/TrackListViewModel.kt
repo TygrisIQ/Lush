@@ -2,13 +2,11 @@ package com.tygris.lush.ui.state
 
 import android.content.ContentUris
 import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.media.MediaMetadataRetriever
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
-import android.util.Log
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.lifecycle.ViewModel
@@ -18,9 +16,7 @@ import com.tygris.lush.domain.model.Track
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
-import java.nio.ByteBuffer
 import java.util.*
-import kotlin.coroutines.suspendCoroutine
 
 class TrackListViewModel : ViewModel() {
     val musicList = mutableListOf<Track>()
@@ -28,9 +24,13 @@ class TrackListViewModel : ViewModel() {
     private val backgroundScope = viewModelScope.plus(Dispatchers.Default)
     private var albumArt : ImageBitmap? = null
 
+    fun getTrack(track_id: Long,context: Context){
+        backgroundScope.launch {
+
+        }
+    }
     fun getMusicList(context: Context){
         if(initialized) return
-        if(albumArt == null) initializeDefaultAlbumArt(context)
         backgroundScope.launch {
                val collection =
                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
@@ -47,7 +47,7 @@ class TrackListViewModel : ViewModel() {
                    MediaStore.Audio.Media.ALBUM_ID,
                    MediaStore.Audio.Media.ARTIST,
                    MediaStore.Audio.Media.MIME_TYPE)
-               val selection = MediaStore.Audio.Media.IS_MUSIC +"!= 0"
+               val selection = MediaStore.Audio.Media.IS_MUSIC +" !=0"
                val sortOrder = MediaStore.Audio.Media.DISPLAY_NAME
                val query = context.contentResolver.query(
                    collection,
@@ -86,8 +86,7 @@ class TrackListViewModel : ViewModel() {
                            track_id = id,
                            track_artist = artist,
                            track_title = name,
-                           track_length = duration.toFloat(),
-                           info_format = format,
+                           track_length = duration.toString(),
                            track_album = album_id,
                            track_uri = contentUri,
                            track_image = null)
@@ -102,6 +101,7 @@ class TrackListViewModel : ViewModel() {
        }
     }
     private fun getAlbumArt(context: Context, uri: Uri) {
+        if(albumArt == null) initializeDefaultAlbumArt(context)
         val mmr = MediaMetadataRetriever()
         mmr.setDataSource(context, uri)
         val data = mmr.embeddedPicture

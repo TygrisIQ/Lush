@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.Text
@@ -36,16 +37,18 @@ import com.tygris.lush.ui.theme.rubik
 fun TrackCard(title: String?,
               Artist: String?,
               album : String?,
-              length : Float,
+              route : Uri,
               isSelected: Boolean,
+              giveRoute: (Uri) -> Unit
               ){
          Card(backgroundColor = Color.Transparent,
             border = BorderStroke(2.dp,Color.Transparent),
             modifier = Modifier
                 .wrapContentHeight()
-                .fillMaxWidth(),
-
-        ) {
+                .fillMaxWidth().clickable {
+                    giveRoute(route)
+                },
+             ) {
             Row() {
                 Column(modifier =Modifier.padding(start = 3.dp,
                     top = 2.dp, bottom = 2.dp)){
