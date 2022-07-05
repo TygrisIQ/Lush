@@ -1,56 +1,48 @@
 package com.tygris.lush.ui.state
 
+
+import android.content.Context
 import android.net.Uri
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.MediaItem
+import com.tygris.lush.domain.model.TrackMinimal
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import androidx.lifecycle.liveData
-import androidx.lifecycle.viewModelScope
-import com.tygris.lush.domain.model.TrackMinimal
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 
 
 @HiltViewModel
-class PlayViewModel @Inject constructor(private val playerClient: PlayerClient)
-    : ViewModel(){
-        private var trackSelected : TrackMinimal? = null
-        val currentTrack = playerClient.nowPlaying.value
-        val state : LiveData<PlayerState> = liveData {
+class PlayViewModel @Inject constructor(
 
+) : ViewModel(){
+        private val player : ExoPlayer? = null
 
-            fun updateSelectedSong(route: Uri) {
-            viewModelScope.launch{
-              trackSelected = playerClient.returnTrack(route = route.toString())
-           }
-            }
-            val currentState = playerClient.nowPlaying.filter {
-                it == null
-            }.map {
-                playing ->
-                playing.let {
-                   it?.containsKey("id")
-                }
-            }
+        fun setPlayer(){
+            player =
+        }
+
+        fun updateSelectedSong(uri: Uri, context: Context){
+            player?.stop()
+            player?.clearMediaItems()
+            val mediaItem = MediaItem.fromUri(uri)
+            val player = ExoPlayer.Builder(context).build()
+            player.setMediaItem(mediaItem)
+            playAudio()
+        }
+        private fun playAudio(){
+            player?.stop()
+            player?.prepare()
+            player?.play()
+
         }
 
 }
-
-
 data class PlayerState(
+    var playingTrack : Uri,
     val isPlaying: Boolean,
-    val loadedTrack : Track?,
-    val availableActions: Set<LushActions>
+    val loadedTrack : TrackMinimal?,
+    val availableActions: LushActions
 ){
-    data class Track(
-        val id: String,
-        val title: String,
-        val artist: String,
-        val duration: Long,
-        val artworkUri: Uri?
-    )
 
     enum class LushActions{
         Pause,

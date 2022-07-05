@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.google.android.exoplayer2.ExoPlayer
 import com.tygris.lush.domain.model.Track
 import com.tygris.lush.ui.screens.mainScreen.elements.TrackCard
 import com.tygris.lush.ui.screens.shared.LushTopBar
@@ -38,7 +39,7 @@ fun MainScreenScaffold(trackListViewModel: TrackListViewModel,
         sheetGesturesEnabled = true
     ){
         MainScreenMusicList(trackListViewModel.musicList){
-            playViewModel.currentTrack
+           playViewModel.updateSelectedSong(it, context)
         }
 
     }
@@ -46,11 +47,12 @@ fun MainScreenScaffold(trackListViewModel: TrackListViewModel,
 
 @Composable
 fun MainScreenMusicList(musicList: List<Track>, giveRoute: (Uri)-> Unit){
+
                 LazyColumn(modifier = Modifier.fillMaxHeight()){
                 item {
                     musicList.forEach {
                     track ->
-                            TrackCard(
+                        TrackCard(
                                 title = track.track_title,
                                 Artist = track.track_artist,
                                 route = track.track_uri,
@@ -61,4 +63,5 @@ fun MainScreenMusicList(musicList: List<Track>, giveRoute: (Uri)-> Unit){
                         } }
 
 
-    } }
+    }
+}

@@ -8,6 +8,10 @@
         <entry key="../../../../layout/compose-model-1651430576847.xml" value="0.18201013513513514" />
         <entry key="../../../../layout/compose-model-1651487746975.xml" value="0.18201013513513514" />
         <entry key="../../../../layout/compose-model-1651499498968.xml" value="2.0" />
+        <entry key="../../.gradle/caches/transforms-3/6e25ef2a803dbd054fb2be7cf4a58416/transformed/libvlc-all-3.4.9/res/layout/player_remote.xml" value="0.16530797101449277" />
+        <entry key="../../.gradle/caches/transforms-3/6e25ef2a803dbd054fb2be7cf4a58416/transformed/libvlc-all-3.4.9/res/layout/texture_view.xml" value="0.16530797101449277" />
+        <entry key="../../.gradle/caches/transforms-3/6e25ef2a803dbd054fb2be7cf4a58416/transformed/libvlc-all-3.4.9/res/layout/vlc_video_layout.xml" value="0.16530797101449277" />
+        <entry key="app/src/main/res/layout/main_view.xml" value="0.16530797101449277" />
       </map>
     </option>
   </component>
